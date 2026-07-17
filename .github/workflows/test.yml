@@ -66,6 +66,16 @@ jobs:
     - name: Compile standard debug app
       run: ./gradlew :app:compileStandardDebugKotlin --build-cache
 
+    - name: Build debug APK
+      run: ./gradlew :app:assembleDebug --build-cache
+
+    - name: Upload debug APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-apks
+        path: app/build/outputs/apk/*/debug/*.apk
+        retention-days: 7
+
     - name: Upload compile report
       uses: actions/upload-artifact@v4
       if: always()
